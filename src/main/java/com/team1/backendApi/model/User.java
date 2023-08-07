@@ -1,0 +1,62 @@
+package com.team1.backendApi.model;
+
+import javax.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "users")
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "spotify_userId", nullable = false)
+    private String spotifyUserId;
+
+    @Column(name = "user_market")
+    private String userMarket;
+
+    @Column(name = "user_email")
+    private String userEmail;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "role_id")
+    private Role role;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Playlist> playlists;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<LocationHistory> locationHistory;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Feedback> feedback;
+
+
+    public User() {
+        // Default constructor required by JPA
+    }
+
+    public User(String spotifyUserId, String userMarket, String userEmail, Role role) {
+        this.spotifyUserId = spotifyUserId;
+        this.userMarket = userMarket;
+        this.userEmail = userEmail;
+        this.role = role;
+        this.playlists = new ArrayList<Playlist>();
+        this.locationHistory = new ArrayList<LocationHistory>();
+        this.feedback = new ArrayList<Feedback>();
+    }
+}
