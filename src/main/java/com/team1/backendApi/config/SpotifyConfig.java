@@ -1,6 +1,5 @@
 package com.team1.backendApi.config;
 
-import lombok.Value;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration

@@ -1,13 +1,9 @@
 package com.team1.backendApi.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.EqualsAndHashCode;
@@ -25,6 +21,8 @@ public class Playlist {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
+
     @Column(name = "timestamp_created")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate timestampCreated;
@@ -36,14 +34,21 @@ public class Playlist {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "playlist")
+    private List<PlaylistSong> playlistSongs;
+
     public Playlist() {
-        // Default constructor required by JPA
+       
     }
 
-    public Playlist(LocalDate timestampCreated, int msPlayed, User user) {
+    public Playlist(Long id, String name, LocalDate timestampCreated, int msPlayed, User user,
+            List<PlaylistSong> playlistSongs) {
+        this.id = id;
+        this.name = name;
         this.timestampCreated = timestampCreated;
         this.msPlayed = msPlayed;
         this.user = user;
+        this.playlistSongs = playlistSongs;
     }
 
 }
