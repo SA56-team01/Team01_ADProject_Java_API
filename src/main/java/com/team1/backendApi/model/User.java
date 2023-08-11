@@ -1,22 +1,16 @@
 package com.team1.backendApi.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "users")
 public class User {
 
     @Id
@@ -40,7 +34,7 @@ public class User {
     private List<Playlist> playlists;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<LocationHistory> locationHistory;
+    private List<UserHistory> userHistories;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Feedback> feedback;
@@ -56,7 +50,7 @@ public class User {
         this.userEmail = userEmail;
         this.role = role;
         this.playlists = new ArrayList<Playlist>();
-        this.locationHistory = new ArrayList<LocationHistory>();
+        this.userHistories = new ArrayList<UserHistory>();
         this.feedback = new ArrayList<Feedback>();
     }
 }
