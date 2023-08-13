@@ -1,9 +1,9 @@
 package com.team1.backendApi.model;
 
-import java.time.LocalDateTime;
-
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
