@@ -1,10 +1,10 @@
 package com.team1.backendApi.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
+
+import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -84,10 +84,8 @@ public class Playlist {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "playlist")
     private List<PlaylistSong> playlistSongs;
 
-    public Playlist() {
-       
-    }
-
+    public Playlist() {}
+    
     public Playlist(Long id, String playlistName, String timestampCreated, double longitudeCreated, double latitudeCreated, String seedTracks, double targetAcousticness, double targetDanceability, double targetEnergy, double targetInstrumentalness, double targetKey, double targetLiveness, double targetLoudenes, double targetMode, double targetSpeechiness, double targetTempo, double targetTimeSignature, double targetValence, String type, User user, List<PlaylistSong> playlistSongs) {
         this.id = id;
         this.playlistName = playlistName;

@@ -1,9 +1,5 @@
 package com.team1.backendApi.model;
 
-import java.time.LocalDateTime;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,8 +14,8 @@ public class UserHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "spotify_userId", nullable = false)
-    private String spotifyUserId;
+    // @Column(name = "spotify_userId", nullable = false)
+    // private String spotifyUserId;
 
     private double latitude;
 
@@ -39,10 +35,10 @@ public class UserHistory {
     public UserHistory() {
     }
 
-    public UserHistory(Long id, String spotifyUserId, double latitude, double longitude, String spotifyTrackId,
+    public UserHistory(Long id, double latitude, double longitude, String spotifyTrackId,
             String timestamp, User user) {
         this.id = id;
-        this.spotifyUserId = spotifyUserId;
+        //this.spotifyUserId = user.getSpotifyUserId();
         this.latitude = latitude;
         this.longitude = longitude;
         this.spotifyTrackId = spotifyTrackId;
