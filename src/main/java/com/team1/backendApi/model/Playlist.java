@@ -1,18 +1,20 @@
 package com.team1.backendApi.model;
 
 import jakarta.persistence.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
 @Getter
 @Setter
 @EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table (name="playlist")
 public class Playlist {
@@ -83,34 +85,6 @@ public class Playlist {
 
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "playlist")
     private List<PlaylistSong> playlistSongs;
-
-
-    public Playlist() {}
-    
-    public Playlist(Long id, String playlistName, String timestampCreated, double longitudeCreated, double latitudeCreated, String seedTracks, double targetAcousticness, double targetDanceability, double targetEnergy, double targetInstrumentalness, double targetKey, double targetLiveness, double targetLoudenes, double targetMode, double targetSpeechiness, double targetTempo, double targetTimeSignature, double targetValence, String type, User user, List<PlaylistSong> playlistSongs) {
-        this.id = id;
-        this.playlistName = playlistName;
-        this.timestampCreated = timestampCreated;
-        this.longitudeCreated = longitudeCreated;
-        this.latitudeCreated = latitudeCreated;
-        this.seedTracks = seedTracks;
-        this.targetAcousticness = targetAcousticness;
-        this.targetDanceability = targetDanceability;
-        this.targetEnergy = targetEnergy;
-        this.targetInstrumentalness = targetInstrumentalness;
-        this.targetKey = targetKey;
-        this.targetLiveness = targetLiveness;
-        this.targetLoudenes = targetLoudenes;
-        this.targetMode = targetMode;
-        this.targetSpeechiness = targetSpeechiness;
-        this.targetTempo = targetTempo;
-        this.targetTimeSignature = targetTimeSignature;
-        this.targetValence = targetValence;
-        this.type = type;
-
-        this.user = user;
-        this.playlistSongs = playlistSongs;
-    }
 
 
 }

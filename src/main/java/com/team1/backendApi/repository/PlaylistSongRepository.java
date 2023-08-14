@@ -2,18 +2,17 @@ package com.team1.backendApi.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.team1.backendApi.model.Playlist;
 import com.team1.backendApi.model.PlaylistSong;
 
 @Repository
-public class PlaylistSongRepository {
+public interface PlaylistSongRepository extends JpaRepository<PlaylistSong, Integer>{
 
-    public void saveAll(List<PlaylistSong> asList) {
-    }
+    // void saveAll(List<PlaylistSong> asList);
 
-    public Object findById(Long id) {
-        return null;
-    }
+    // Object findById(Long id);
     
 }

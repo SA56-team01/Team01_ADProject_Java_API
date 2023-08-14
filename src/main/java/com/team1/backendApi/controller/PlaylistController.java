@@ -32,8 +32,8 @@ public class PlaylistController {
     private UserService userService;
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<PlaylistDto>> getPlaylistsByUserId(@PathVariable Long userId) {
-        List<PlaylistDto> playlists = playlistService.getPlaylistsByUserId(userId);
+    public ResponseEntity<List<Playlist>> getPlaylistsByUserId(@PathVariable Long userId) {
+        List<Playlist> playlists = playlistService.getPlaylistsByUserId(userId);
         return new ResponseEntity<>(playlists, HttpStatus.OK);
     }
 
