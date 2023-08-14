@@ -42,7 +42,7 @@ public class UserHistoryController {
 
     @PostMapping("/userHistory") //android
     public ResponseEntity<String> addUserHistory(@RequestBody UserHistory userHistory,
-                                                 @RequestParam String spotifyUserId) {
+                                                 @RequestParam("spotify_user_id") String spotifyUserId) {
         try {
             userHistoryService.addUserHistory(userHistory, spotifyUserId);
             return ResponseEntity.ok("User history added successfully.");

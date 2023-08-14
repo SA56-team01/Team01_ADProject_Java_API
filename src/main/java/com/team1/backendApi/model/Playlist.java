@@ -81,8 +81,9 @@ public class Playlist {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "playlist")
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "playlist")
     private List<PlaylistSong> playlistSongs;
+
 
     public Playlist() {}
     

@@ -37,10 +37,10 @@ public class BackendApiApplication {
           	playlistRepository.saveAll(Arrays.asList(playlist1, playlist2));
 
             // Create playlist songs
-            PlaylistSong playlistSong1 = new PlaylistSong(101L, playlist1);
-            PlaylistSong playlistSong2 = new PlaylistSong(102L, playlist1);
-            PlaylistSong playlistSong3 = new PlaylistSong(201L, playlist2);
-            playlistSongRepository.saveAll(Arrays.asList(playlistSong1, playlistSong2, playlistSong3));
+            PlaylistSong playlistSong1 = new PlaylistSong("101L", playlist1);
+            PlaylistSong playlistSong2 = new PlaylistSong("102L", playlist1);
+           // PlaylistSong playlistSong3 = new PlaylistSong(201L, playlist2);
+            playlistSongRepository.saveAll(Arrays.asList(playlistSong1, playlistSong2));
         };
     }
 }

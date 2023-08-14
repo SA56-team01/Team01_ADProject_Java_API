@@ -11,5 +11,9 @@ public class PlaylistSongRepository {
 
     public void saveAll(List<PlaylistSong> asList) {
     }
+
+    public Object findById(Long id) {
+        return null;
+    }
     
 }
