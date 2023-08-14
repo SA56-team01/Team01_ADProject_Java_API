@@ -35,3 +35,4 @@ build/
 ### Git ###
 .DS_Store
 .gitignore
+src/main/java/com/team1/backendApi/config/SpotifyConfig.java

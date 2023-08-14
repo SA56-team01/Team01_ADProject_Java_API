@@ -1,12 +1,14 @@
 package com.team1.backendApi.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -32,12 +34,15 @@ public class User {
     private Role role;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonIgnore
     private List<Playlist> playlists;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonIgnore
     private List<UserHistory> userHistories;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonIgnore
     private List<Feedback> feedback;
 
 
