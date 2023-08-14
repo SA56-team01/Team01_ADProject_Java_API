@@ -27,8 +27,7 @@ public class PlaylistSong{
     @JoinColumn(name = "playlist_id")
     private Playlist playlist;   
 
-    public PlaylistSong() {
-    }
+    public PlaylistSong() {}
 
     public PlaylistSong(Long id, Playlist playlist) {
         this.id = id;

@@ -15,7 +15,8 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name="user_id")
+    private Long userId;
 
     @Column(name = "spotify_userId", nullable = false)
     private String spotifyUserId;
@@ -41,7 +42,6 @@ public class User {
 
 
     public User() {
-        // Default constructor required by JPA
     }
 
     public User(String spotifyUserId, String userMarket, String userEmail, Role role) {
