@@ -1,8 +1,5 @@
 package com.team1.backendApi.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -14,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.team1.backendApi.model.User;
 import com.team1.backendApi.model.UserHistory;
 import com.team1.backendApi.model.UserHistoryDto;
 import com.team1.backendApi.service.UserHistoryService;
@@ -27,8 +23,6 @@ public class UserHistoryController {
 
     @Autowired
     private UserHistoryService userHistoryService;
-
-    private final Logger logger = LoggerFactory.getLogger(UserHistoryController.class);
 
     @GetMapping("/user/history") //ML
     public ResponseEntity<List<UserHistory>> getUserHistory() {
@@ -47,10 +41,10 @@ public class UserHistoryController {
     // }
 
     @PostMapping("/userHistory") //android
-    public ResponseEntity<String> addUserHistory(@RequestBody UserHistoryDto userHistoryDto,
+    public ResponseEntity<String> addUserHistory(@RequestBody UserHistory userHistory,
                                                  @RequestParam String spotifyUserId) {
         try {
-            userHistoryService.addUserHistory(userHistoryDto, spotifyUserId);
+            userHistoryService.addUserHistory(userHistory, spotifyUserId);
             return ResponseEntity.ok("User history added successfully.");
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found.");

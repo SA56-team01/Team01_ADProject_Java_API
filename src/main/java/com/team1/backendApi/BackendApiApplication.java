@@ -29,7 +29,7 @@ public class BackendApiApplication {
             // Create a user
             User user1 = new User("spotify_user123", "US", "user@example.com", new Role("ROLE_USER"));
             userRepository.save(user1);
-            User user2 = userRepository.findById(1).orElse(null);
+            User user2 = userRepository.findById((long) 1).orElse(null);
 
             // Create playlists
             Playlist playlist1 = new Playlist(1L, "My Playlist 1", "2023-08-13", 12.34, 56.78, "track1,track2", 0.7, 0.8, 0.6, 0.5, 2.0, 0.7, -5.0, 1.0, 0.4, 120.0, 4.0, 0.9, "pop", user1, new ArrayList<>());

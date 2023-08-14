@@ -33,6 +33,7 @@ public class UserHistory {
     @JoinColumn(name = "user_id")
     private User user;
 
+
     public UserHistory() {
     }
 

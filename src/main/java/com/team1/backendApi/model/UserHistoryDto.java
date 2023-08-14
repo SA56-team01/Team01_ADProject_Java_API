@@ -27,14 +27,4 @@ public class UserHistoryDto {
         this.latitude = latitude;
         this.longitude = longitude;
     }
-
-
-
-    // public UserHistoryDto(UserHistory userHistory) {
-    //     this.spotifyUserId = spotifyUserId;
-    //     this.spotifyTrackId = userHistory.getSpotifyTrackId();
-    //     this.timestamp = userHistory.getTimestamp();
-    //     this.latitude = userHistory.getLatitude();
-    //     this.longitude = userHistory.getLongitude();
-    // }
 }
