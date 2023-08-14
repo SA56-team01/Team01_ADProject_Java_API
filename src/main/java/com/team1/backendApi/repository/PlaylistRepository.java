@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import com.team1.backendApi.model.Playlist;
 
 @Repository
-public interface PlaylistRepository extends JpaRepository<Playlist, Integer>{
+public interface PlaylistRepository extends JpaRepository<Playlist, Long>{
 
-    List<Playlist> findByUser_UserId(Long userId);
+    List<Playlist> findBySpotifyUserId(String spotifyUserId);
     
 }

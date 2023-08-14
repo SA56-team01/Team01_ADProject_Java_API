@@ -1,12 +1,15 @@
 package com.team1.backendApi.model;
 
 import jakarta.persistence.*;
-
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table (name="User_History")
 public class UserHistory {
@@ -14,9 +17,6 @@ public class UserHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    // @Column(name = "spotify_userId", nullable = false)
-    // private String spotifyUserId;
 
     private double latitude;
 
@@ -30,23 +30,7 @@ public class UserHistory {
     private String timestamp;
     
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "spotify_userId")
     private User user;
-
-
-    public UserHistory() {
-    }
-
-    public UserHistory(Long id, double latitude, double longitude, String spotifyTrackId,
-            String timestamp, User user) {
-        this.id = id;
-        //this.spotifyUserId = user.getSpotifyUserId();
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.spotifyTrackId = spotifyTrackId;
-        this.timestamp = timestamp;
-        this.user = user;
-    }
-
     
 }

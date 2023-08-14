@@ -27,6 +27,7 @@ public class BackendApiApplication {
     public CommandLineRunner demo(UserRepository userRepository, PlaylistRepository playlistRepository, PlaylistSongRepository playlistSongRepository) {
         return (args) -> {
             // Create a user
+           // User user1 = new User("spotify_user123", "US", "user@example.com", new Role("ROLE_USER"));
             User user1 = new User("spotify_user123", "US", "user@example.com", new Role("ROLE_USER"));
             userRepository.save(user1);
             User user2 = userRepository.findById((long) 1).orElse(null);

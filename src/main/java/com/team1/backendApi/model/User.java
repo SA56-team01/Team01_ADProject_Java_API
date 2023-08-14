@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -12,6 +14,8 @@ import java.util.List;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class User {
 
@@ -44,10 +48,6 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     @JsonIgnore
     private List<Feedback> feedback;
-
-
-    public User() {
-    }
 
     public User(String spotifyUserId, String userMarket, String userEmail, Role role) {
         this.spotifyUserId = spotifyUserId;

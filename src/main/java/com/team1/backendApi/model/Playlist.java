@@ -27,15 +27,15 @@ public class Playlist {
     @Column(name="playlist_name")
     private String playlistName;
 
-    @Column(name = "timestamp_created")
+    @Column(name = "timestamp")
     //@DateTimeFormat(pattern = "yyyy-MM-dd")
-    private String timestampCreated;
+    private String timestamp;
 
-    @Column(name="longitude_created")
-    private double longitudeCreated;
+    @Column(name="longitude")
+    private Double longitude;
 
-    @Column(name="latitude_created")
-    private double latitudeCreated;
+    @Column(name="latitude")
+    private Double latitude;
 
     @Column(name="seed_tracks")
     private String seedTracks;
@@ -80,7 +80,7 @@ public class Playlist {
     private String type;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "spotify_userId")
     private User user;
 
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "playlist")

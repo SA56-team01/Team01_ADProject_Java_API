@@ -9,7 +9,7 @@ import com.team1.backendApi.model.Playlist;
 import com.team1.backendApi.model.PlaylistSong;
 
 @Repository
-public interface PlaylistSongRepository extends JpaRepository<PlaylistSong, Integer>{
+public interface PlaylistSongRepository extends JpaRepository<PlaylistSong, Long>{
 
     // void saveAll(List<PlaylistSong> asList);
 

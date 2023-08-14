@@ -54,9 +54,9 @@ public class UserController {
             Map<String, Object> playlistMap = new HashMap<>();
             playlistMap.put("playlist_id", playlist.getId());
             playlistMap.put("user_id", playlist.getUser().getUserId());
-            playlistMap.put("latitude_created", playlist.getLatitudeCreated());
-            playlistMap.put("longitude_created", playlist.getLongitudeCreated());
-            playlistMap.put("timestamp_created", playlist.getTimestampCreated());
+            playlistMap.put("latitude", playlist.getLatitude());
+            playlistMap.put("longitude", playlist.getLongitude());
+            playlistMap.put("timestamp", playlist.getTimestamp());
             playlistMap.put("seed_tracks", Arrays.asList(playlist.getSeedTracks().split(",")));
             playlistMap.put("target_acousticness", playlist.getTargetAcousticness());
             playlistMap.put("target_danceability", playlist.getTargetDanceability());

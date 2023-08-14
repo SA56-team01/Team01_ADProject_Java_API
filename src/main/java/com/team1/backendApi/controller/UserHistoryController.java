@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.team1.backendApi.model.User;
 import com.team1.backendApi.model.UserHistory;
 import com.team1.backendApi.model.UserHistoryDto;
 import com.team1.backendApi.service.UserHistoryService;
+import com.team1.backendApi.service.UserService;
 
 import java.util.List;
 
@@ -23,6 +25,9 @@ public class UserHistoryController {
 
     @Autowired
     private UserHistoryService userHistoryService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/user/history") //ML
     public ResponseEntity<List<UserHistory>> getUserHistory() {
@@ -41,14 +46,26 @@ public class UserHistoryController {
     // }
 
     @PostMapping("/userHistory") //android
-    public ResponseEntity<String> addUserHistory(@RequestBody UserHistory userHistory,
-                                                 @RequestParam("spotify_user_id") String spotifyUserId) {
+    public ResponseEntity<String> addUserHistory(@RequestParam("spotify_userId") String spotifyUserId, @RequestBody UserHistory userHistory) {
         try {
-            userHistoryService.addUserHistory(userHistory, spotifyUserId);
+            User user = userService.getUserBySpotifyUserId(spotifyUserId);
+
+            if(user == null){
+                return new ResponseEntity<String>("no user found for user id"+ spotifyUserId , HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+            
+            UserHistory newUserHistory = new UserHistory();
+            newUserHistory.setUser(userService.getUserBySpotifyUserId(spotifyUserId));
+            newUserHistory.setSpotifyTrackId(spotifyUserId);
+            newUserHistory.setLatitude(userHistory.getLatitude());
+            newUserHistory.setLongitude(userHistory.getLongitude());
+            newUserHistory.setTimestamp(userHistory.getTimestamp());
+
+            userHistoryService.addUserHistory(newUserHistory);
+
             return ResponseEntity.ok("User history added successfully.");
-        } catch (ResourceNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found.");
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred.");
         }
     }

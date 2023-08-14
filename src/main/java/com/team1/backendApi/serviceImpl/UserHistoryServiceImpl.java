@@ -1,5 +1,6 @@
 package com.team1.backendApi.serviceImpl;
 
+import com.team1.backendApi.model.Playlist;
 import com.team1.backendApi.model.User;
 import com.team1.backendApi.model.UserHistory;
 import com.team1.backendApi.repository.UserHistoryRepository;
@@ -40,20 +41,9 @@ public class UserHistoryServiceImpl implements UserHistoryService{
     // }
 
     @Override
-    public void addUserHistory(UserHistory userHistory, String spotifyUserId) {
-    // Find the user by SpotifyUserId
-    User user = userRepository.findBySpotifyUserId(spotifyUserId);
-
-    // Check if the user exists
-    if (user == null) {
-        throw new ResourceNotFoundException("User not found");
-    }
-
-    // Set the user for the provided userHistory object
-    userHistory.setUser(user);
-
-    // Save the UserHistory entity
-    userHistoryRepository.save(userHistory);
+    public UserHistory addUserHistory(UserHistory userHistory) {
+    
+        return userHistoryRepository.save(userHistory);
     }
     
 

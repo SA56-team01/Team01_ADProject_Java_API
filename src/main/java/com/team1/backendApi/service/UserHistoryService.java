@@ -7,8 +7,10 @@ import com.team1.backendApi.model.UserHistory;
 public interface UserHistoryService {
 
     // UserHistoryDto addUserHistory(UserHistoryDto userHistoryDto);
-    void addUserHistory(UserHistory userHistory, String spotifyUserId);
+    // void addUserHistory(UserHistory userHistory, String spotifyUserId);
     
     public List<UserHistory> getUserHistory();
+
+    UserHistory addUserHistory(UserHistory newUserHistory);
     
 }

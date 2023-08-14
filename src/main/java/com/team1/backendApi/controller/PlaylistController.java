@@ -1,6 +1,5 @@
 package com.team1.backendApi.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.team1.backendApi.model.Playlist;
-import com.team1.backendApi.model.PlaylistDto;
 import com.team1.backendApi.model.PlaylistSong;
 import com.team1.backendApi.model.User;
 import com.team1.backendApi.service.PlaylistService;
@@ -31,27 +29,27 @@ public class PlaylistController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Playlist>> getPlaylistsByUserId(@PathVariable Long userId) {
-        List<Playlist> playlists = playlistService.getPlaylistsByUserId(userId);
+    @GetMapping("/user/{spotify_userId}")
+    public ResponseEntity<List<Playlist>> getPlaylistsByUserId(@PathVariable String spotifyUserId) {
+        List<Playlist> playlists = playlistService.getPlaylistsBySpotifyUserId(spotifyUserId);
         return new ResponseEntity<>(playlists, HttpStatus.OK);
     }
 
     @PostMapping("/store")
-    public ResponseEntity<String> storePlaylist(@RequestParam("user_id") Long userId, @RequestBody Playlist playlist) {
+    public ResponseEntity<String> storePlaylist(@RequestParam("spotify_userId") String spotifyUserId, @RequestBody Playlist playlist) {
 
         try{
-            User user = userService.getUserById(userId);
+            User user = userService.getUserBySpotifyUserId(spotifyUserId);
             if(user == null){
-                return new ResponseEntity<String>("no user found for user id"+ userId , HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<String>("no user found for user id"+ spotifyUserId , HttpStatus.INTERNAL_SERVER_ERROR);
             }
             
             Playlist newPlaylist = new Playlist();
-            newPlaylist.setUser(userService.getUserById(userId));
+            newPlaylist.setUser(userService.getUserBySpotifyUserId(spotifyUserId));
             newPlaylist.setPlaylistName(playlist.getPlaylistName());
-            newPlaylist.setTimestampCreated(playlist.getTimestampCreated());
-            newPlaylist.setLongitudeCreated(playlist.getLongitudeCreated());
-            newPlaylist.setLatitudeCreated(playlist.getLatitudeCreated());
+            newPlaylist.setTimestamp(playlist.getTimestamp());
+            newPlaylist.setLongitude(playlist.getLongitude());
+            newPlaylist.setLatitude(playlist.getLatitude());
             newPlaylist.setSeedTracks(playlist.getSeedTracks());
             newPlaylist.setTargetAcousticness(playlist.getTargetAcousticness());
             newPlaylist.setTargetDanceability(playlist.getTargetDanceability());
