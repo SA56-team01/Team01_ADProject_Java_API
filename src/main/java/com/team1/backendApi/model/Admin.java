@@ -1,6 +1,6 @@
 package com.team1.backendApi.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 

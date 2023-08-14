@@ -1,6 +1,6 @@
 package com.team1.backendApi.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
