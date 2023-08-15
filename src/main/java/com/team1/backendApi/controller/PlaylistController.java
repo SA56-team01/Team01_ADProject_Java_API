@@ -33,6 +33,7 @@ public class PlaylistController {
 
     @GetMapping("/user/{spotifyUserId}")
     public ResponseEntity<List<PlaylistDto>> getPlaylistsBySpotifyUserId(@PathVariable String spotifyUserId) {
+        try{
         List<Playlist> playlists = playlistService.getPlaylistsBySpotifyUserId(spotifyUserId);
 
         List<PlaylistDto> simplifiedPlaylists = new ArrayList<>();
@@ -52,6 +53,10 @@ public class PlaylistController {
         }
 
         return ResponseEntity.ok(simplifiedPlaylists);
+        } catch (Exception e) {
+        
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @PostMapping("/store")

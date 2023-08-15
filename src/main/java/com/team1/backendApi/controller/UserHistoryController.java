@@ -30,9 +30,15 @@ public class UserHistoryController {
 
     @GetMapping("/user/history") //ML
     public ResponseEntity<List<UserHistory>> getUserHistory() {
-        List<UserHistory> historyEntries = userHistoryService.getUserHistory();
-        return ResponseEntity.ok(historyEntries);
+        try {
+            List<UserHistory> historyEntries = userHistoryService.getUserHistory();
+            return ResponseEntity.ok(historyEntries);
+        } catch (Exception e) {
+        
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
 
     // @PostMapping("/user-history") //android
     // public ResponseEntity<String> addUserHistory(@RequestBody UserHistoryDto userHistoryDto) {
