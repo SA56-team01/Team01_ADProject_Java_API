@@ -73,5 +73,11 @@ public class UserHistoryServiceImpl implements UserHistoryService{
         
         return userHistoryEntries;
     }
+
+
+    @Override
+    public List<UserHistory> getUserHistoryBySpotifyUserId(String userId) {
+        return userHistoryRepository.findBySpotifyUserId(userId);
+    }
     
 }
