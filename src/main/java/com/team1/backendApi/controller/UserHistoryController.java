@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.team1.backendApi.model.User;
 import com.team1.backendApi.model.UserHistory;
-import com.team1.backendApi.model.UserHistoryDto;
 import com.team1.backendApi.service.UserHistoryService;
 import com.team1.backendApi.service.UserService;
 

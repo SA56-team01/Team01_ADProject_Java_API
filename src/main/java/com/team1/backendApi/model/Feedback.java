@@ -27,12 +27,6 @@ public class Feedback {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Feedback(){}
-
-    public Feedback(Long id, String feedbackText, String fbTimestamp, User user) {
-        this.id = id;
-        this.feedbackText = feedbackText;
-        this.fbTimestamp = fbTimestamp;
-        this.user = user;
-    }
+    @Transient // to indicate a non-persistent field
+    private String spotifyUserId; // for mapping the Spotify user ID
 }

@@ -1,11 +1,14 @@
 package com.team1.backendApi.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import com.team1.backendApi.model.Feedback;
+import com.team1.backendApi.model.User;
 
-@Repository
 public interface FeedbackRepository extends JpaRepository<Feedback, Long>{
-    
+
+    List<Feedback> findByUser(User user);
+  
 }
