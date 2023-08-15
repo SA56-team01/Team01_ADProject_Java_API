@@ -9,8 +9,9 @@ public interface UserHistoryService {
     // UserHistoryDto addUserHistory(UserHistoryDto userHistoryDto);
     // void addUserHistory(UserHistory userHistory, String spotifyUserId);
     
-    public List<UserHistory> getUserHistory();
+    List<UserHistory> getUserHistory();
 
     UserHistory addUserHistory(UserHistory newUserHistory);
-    
+
+    List<UserHistory> getUserHistoryBySpotifyUserId(String userId);
 }
