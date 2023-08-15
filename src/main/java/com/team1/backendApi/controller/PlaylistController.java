@@ -30,7 +30,7 @@ public class PlaylistController {
     private UserService userService;
 
     @GetMapping("/user/{spotify_userId}")
-    public ResponseEntity<List<Playlist>> getPlaylistsByUserId(@PathVariable String spotifyUserId) {
+    public ResponseEntity<List<Playlist>> getPlaylistsBySpotifyUserId(@PathVariable String spotifyUserId) {
         List<Playlist> playlists = playlistService.getPlaylistsBySpotifyUserId(spotifyUserId);
         return new ResponseEntity<>(playlists, HttpStatus.OK);
     }

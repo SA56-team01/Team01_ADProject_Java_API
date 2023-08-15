@@ -79,8 +79,8 @@ public class Playlist {
     @Column(name="type")
     private String type;
 
-    @ManyToOne
-    @JoinColumn(name = "spotify_userId")
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "spotify_user_id")
     private User user;
 
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "playlist")

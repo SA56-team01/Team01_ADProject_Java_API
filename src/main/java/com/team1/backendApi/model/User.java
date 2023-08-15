@@ -24,7 +24,7 @@ public class User {
     @Column(name="user_id")
     private Long userId;
 
-    @Column(name = "spotify_userId", nullable = false)
+    @Column(name = "spotify_user_id", nullable = false)
     private String spotifyUserId;
 
     @Column(name = "user_market")

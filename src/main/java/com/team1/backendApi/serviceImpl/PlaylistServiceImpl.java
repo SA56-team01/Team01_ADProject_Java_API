@@ -17,7 +17,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 
     @Override
     public List<Playlist> getPlaylistsBySpotifyUserId(String spotifyUserId) {
-        return playlistRepository.findBySpotifyUserId(spotifyUserId);
+        return playlistRepository.findByUserSpotifyUserId(spotifyUserId);
     }
 
     @Override

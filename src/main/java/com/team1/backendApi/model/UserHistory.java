@@ -30,7 +30,7 @@ public class UserHistory {
     private String timestamp;
     
     @ManyToOne
-    @JoinColumn(name = "spotify_userId")
+    @JoinColumn(name = "spotify_user_id")
     private User user;
     
 }

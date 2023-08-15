@@ -10,6 +10,10 @@ import com.team1.backendApi.model.Playlist;
 @Repository
 public interface PlaylistRepository extends JpaRepository<Playlist, Long>{
 
-    List<Playlist> findBySpotifyUserId(String spotifyUserId);
+    //List<Playlist> findBySpotifyUserId(String spotifyUserId);
+
+    //List<Playlist> findByUser_SpotifyUserId(String spotifyUserId);
     
+    List<Playlist> findByUserSpotifyUserId(String spotifyUserId);
+
 }
