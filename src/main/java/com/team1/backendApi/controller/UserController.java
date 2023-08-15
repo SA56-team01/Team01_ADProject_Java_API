@@ -53,7 +53,7 @@ public class UserController {
         for (Playlist playlist : user.getPlaylists()) {
             Map<String, Object> playlistMap = new HashMap<>();
             playlistMap.put("playlist_id", playlist.getId());
-            playlistMap.put("user_id", playlist.getUser().getUserId());
+            playlistMap.put("spotify_user_id", playlist.getUser().getSpotifyUserId());
             playlistMap.put("latitude", playlist.getLatitude());
             playlistMap.put("longitude", playlist.getLongitude());
             playlistMap.put("timestamp", playlist.getTimestamp());

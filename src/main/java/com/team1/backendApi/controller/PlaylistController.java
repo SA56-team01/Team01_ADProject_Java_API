@@ -1,5 +1,6 @@
 package com.team1.backendApi.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.team1.backendApi.model.Playlist;
+import com.team1.backendApi.model.PlaylistDto;
 import com.team1.backendApi.model.PlaylistSong;
 import com.team1.backendApi.model.User;
 import com.team1.backendApi.service.PlaylistService;
@@ -29,10 +31,27 @@ public class PlaylistController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/user/{spotify_userId}")
-    public ResponseEntity<List<Playlist>> getPlaylistsBySpotifyUserId(@PathVariable String spotifyUserId) {
+    @GetMapping("/user/{spotifyUserId}")
+    public ResponseEntity<List<PlaylistDto>> getPlaylistsBySpotifyUserId(@PathVariable String spotifyUserId) {
         List<Playlist> playlists = playlistService.getPlaylistsBySpotifyUserId(spotifyUserId);
-        return new ResponseEntity<>(playlists, HttpStatus.OK);
+
+        List<PlaylistDto> simplifiedPlaylists = new ArrayList<>();
+        for (Playlist playlist : playlists) {
+            PlaylistDto PlaylistDto = new PlaylistDto(
+                playlist.getId(), playlist.getPlaylistName(), playlist.getTimestamp(),
+                playlist.getLongitude(), playlist.getLatitude(), playlist.getSeedTracks(),
+                playlist.getTargetAcousticness(), playlist.getTargetDanceability(),
+                playlist.getTargetEnergy(), playlist.getTargetInstrumentalness(),
+                playlist.getTargetKey(), playlist.getTargetLiveness(),
+                playlist.getTargetLoudenes(), playlist.getTargetMode(),
+                playlist.getTargetSpeechiness(), playlist.getTargetTempo(),
+                playlist.getTargetTimeSignature(), playlist.getTargetValence(),
+                playlist.getType(), playlist.getPlaylistSongs()
+            );
+            simplifiedPlaylists.add(PlaylistDto);
+        }
+
+        return ResponseEntity.ok(simplifiedPlaylists);
     }
 
     @PostMapping("/store")

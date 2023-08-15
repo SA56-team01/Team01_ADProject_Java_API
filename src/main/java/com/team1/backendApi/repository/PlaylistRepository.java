@@ -3,17 +3,16 @@ package com.team1.backendApi.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.team1.backendApi.model.Playlist;
 
 @Repository
-public interface PlaylistRepository extends JpaRepository<Playlist, Long>{
-
-    //List<Playlist> findBySpotifyUserId(String spotifyUserId);
-
-    //List<Playlist> findByUser_SpotifyUserId(String spotifyUserId);
+public interface PlaylistRepository extends JpaRepository<Playlist, Long> {
     
-    List<Playlist> findByUserSpotifyUserId(String spotifyUserId);
-
+    @Query("SELECT p FROM Playlist p WHERE p.user.spotifyUserId = :spotifyUserId")
+    List<Playlist> findByUserSpotifyUserId(@Param("spotifyUserId") String spotifyUserId);
 }
+

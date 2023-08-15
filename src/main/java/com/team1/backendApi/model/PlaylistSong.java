@@ -1,5 +1,7 @@
 package com.team1.backendApi.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +26,7 @@ public class PlaylistSong{
 
     @ManyToOne
     @JoinColumn(name = "playlist_id")
+    @JsonBackReference
     private Playlist playlist;
 
     public PlaylistSong(String trackId, Playlist playlist) {

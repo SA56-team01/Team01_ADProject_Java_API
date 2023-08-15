@@ -3,6 +3,10 @@ package com.team1.backendApi.model;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -15,6 +19,7 @@ import lombok.Setter;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties("user")
 @Entity
 @Table (name="playlist")
 public class Playlist {
@@ -79,12 +84,15 @@ public class Playlist {
     @Column(name="type")
     private String type;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "spotify_user_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @JsonIgnore
     private User user;
 
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "playlist")
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "playlist", fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<PlaylistSong> playlistSongs;
 
 
+    
 }
