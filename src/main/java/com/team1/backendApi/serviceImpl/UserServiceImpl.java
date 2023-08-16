@@ -24,5 +24,12 @@ public class UserServiceImpl implements UserService {
         return userRepo.findById(userId)
 				.orElseThrow(() -> new ResourceNotFoundException());
     }
-    
+
+    @Override
+    public void createNewUser(String spotifyUserId) {
+        User newUser = new User();
+        newUser.setSpotifyUserId(spotifyUserId);
+        userRepo.save(newUser);
+    }
+
 }

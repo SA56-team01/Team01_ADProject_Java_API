@@ -48,7 +48,8 @@ public class UserHistoryController {
             User user = userService.getUserBySpotifyUserId(spotifyUserId);
 
             if(user == null){
-                return new ResponseEntity<String>("no user found for user id"+ spotifyUserId , HttpStatus.INTERNAL_SERVER_ERROR);
+                userService.createNewUser(spotifyUserId);
+//                return new ResponseEntity<String>("no user found for user id"+ spotifyUserId , HttpStatus.INTERNAL_SERVER_ERROR);
             }
             
             UserHistory newUserHistory = new UserHistory();

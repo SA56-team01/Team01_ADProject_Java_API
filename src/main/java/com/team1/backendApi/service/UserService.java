@@ -7,4 +7,5 @@ public interface UserService {
     User getUserBySpotifyUserId(String spotifyUserId);
 
     User getUserById(Long userId);
+    void  createNewUser(String spotifyUserId);
 }
