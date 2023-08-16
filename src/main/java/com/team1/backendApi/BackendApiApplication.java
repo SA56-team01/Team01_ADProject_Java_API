@@ -2,26 +2,41 @@ package com.team1.backendApi;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.team1.backendApi.model.Admin;
 import com.team1.backendApi.model.Playlist;
 import com.team1.backendApi.model.PlaylistSong;
 import com.team1.backendApi.model.Role;
 import com.team1.backendApi.model.User;
+import com.team1.backendApi.repository.AdminRepository;
 import com.team1.backendApi.repository.PlaylistRepository;
 import com.team1.backendApi.repository.PlaylistSongRepository;
 import com.team1.backendApi.repository.UserRepository;
+import com.team1.backendApi.service.AdminService;
+
+import jakarta.annotation.PostConstruct;
 
 @SpringBootApplication
 public class BackendApiApplication {
+    @Autowired
+    private AdminService adminService;
+    @Autowired
+    AdminRepository adminRepo;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackendApiApplication.class, args);
 	}
+    
 
 	@Bean
     public CommandLineRunner demo(UserRepository userRepository, PlaylistRepository playlistRepository, PlaylistSongRepository playlistSongRepository) {
@@ -46,6 +61,14 @@ public class BackendApiApplication {
     // userRepository.saveAll(Arrays.asList(user1, user2));
     // playlistRepository.saveAll(Arrays.asList(playlist1, playlist2));
     // playlistSongRepository.saveAll(Arrays.asList(song1, song2, song3, song4));
+     // Create a new admin
+        Role adminRole = new Role("ROLE_ADMIN");
+        Admin admin = new Admin();
+        admin.setUsername("admin2");
+        admin.setPassword(passwordEncoder.encode("secretpassword"));
+           
+        // Save the admin with hashed password
+        adminRepo.save(admin);
 
         };
     }
