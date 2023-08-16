@@ -1,32 +1,34 @@
 package com.team1.backendApi.model;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table (name="feedback")
+@Table(name = "feedback")
 public class Feedback {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="feedback_id")
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "feedback_id")
+  private Long id;
 
-    @Column(name="feedback_text")
-    private String feedbackText;
+  @Column(name = "feedback_text")
+  private String feedbackText;
 
-    @Column(name="fb_timestamp")
-    private String fbTimestamp;
+  @Column(name = "fb_timestamp")
+  private String fbTimestamp;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+  @ManyToOne
+  @JoinColumn(name = "user_id")
+  private User user;
 
-    @Transient // to indicate a non-persistent field
-    private String spotifyUserId; // for mapping the Spotify user ID
+  @Transient // to indicate a non-persistent field
+  private String spotifyUserId; // for mapping the Spotify user ID
 }
