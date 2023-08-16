@@ -25,5 +25,9 @@ public class AdminServiceImpl implements AdminService {
         return null;
 
     }
+    @Override
+    public Admin getAdminByUsername(String username) {
+        return adminRepo.findByUsername(username);
+    }
     
 }

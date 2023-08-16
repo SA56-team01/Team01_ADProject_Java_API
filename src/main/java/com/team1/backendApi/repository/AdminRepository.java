@@ -11,5 +11,6 @@ import com.team1.backendApi.model.Admin;
 public interface AdminRepository extends JpaRepository<Admin, Long> {
 
     Optional<Admin> findById(Long adminId);
+    Admin findByUsername(String username);
     
 }

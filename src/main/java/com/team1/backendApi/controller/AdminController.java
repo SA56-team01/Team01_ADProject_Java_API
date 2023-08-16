@@ -19,9 +19,9 @@ public class AdminController {
     AdminService adminService;
 
     @GetMapping("/auth")
-    public ResponseEntity<String> checkAdminLogin(@RequestParam("admin_id") Long adminId, @RequestParam("password") String password) {
+    public ResponseEntity<String> checkAdminLogin(@RequestParam("username") String username, @RequestParam("password") String password) {
 
-        Admin adminUser = adminService.getAdminById(adminId);
+        Admin adminUser = adminService.getAdminByUsername(username);
 
         if(adminUser == null) {
             String errorMessage = "Access denied.";
@@ -33,6 +33,6 @@ public class AdminController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorMessage);
         }
 
-        return ResponseEntity.ok("Login successful.");
+        return ResponseEntity.ok("Login successful."); 
     }
 }
