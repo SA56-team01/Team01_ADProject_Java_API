@@ -41,6 +41,10 @@ public class UserHistoryController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+    @GetMapping("/test-connection")
+    public String connectionTest(){
+        return "Ok";
+    }
 
     @PostMapping("/userHistory") //android
     public ResponseEntity<String> addUserHistory(@RequestParam("spotify_userId") String spotifyUserId, @RequestBody UserHistory userHistory) {
@@ -54,7 +58,7 @@ public class UserHistoryController {
             
             UserHistory newUserHistory = new UserHistory();
             newUserHistory.setUser(userService.getUserBySpotifyUserId(spotifyUserId));
-            newUserHistory.setSpotifyTrackId(spotifyUserId);
+            newUserHistory.setSpotifyTrackId(userHistory.getSpotifyTrackId());
             newUserHistory.setLatitude(userHistory.getLatitude());
             newUserHistory.setLongitude(userHistory.getLongitude());
             newUserHistory.setTimestamp(userHistory.getTimestamp());
