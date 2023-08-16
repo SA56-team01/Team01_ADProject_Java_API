@@ -1,9 +1,5 @@
 package com.team1.backendApi;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,11 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.team1.backendApi.config.CorsConfig;
 import com.team1.backendApi.model.Admin;
-import com.team1.backendApi.model.Playlist;
-import com.team1.backendApi.model.PlaylistSong;
 import com.team1.backendApi.model.Role;
-import com.team1.backendApi.model.User;
 
 import com.team1.backendApi.repository.AdminRepository;
 
