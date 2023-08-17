@@ -82,13 +82,13 @@ public class Playlist {
   @Column(name = "type")
   private String type;
 
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne
   @JoinColumn(name = "user_id", referencedColumnName = "user_id")
   @JsonIgnore
   private User user;
 
   @OneToMany(
-    cascade = { CascadeType.ALL },
+    cascade = { CascadeType.PERSIST, CascadeType.MERGE },
     mappedBy = "playlist",
     fetch = FetchType.EAGER
   )
