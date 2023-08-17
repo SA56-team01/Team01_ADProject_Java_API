@@ -62,7 +62,7 @@ public class Playlist {
   private double targetLiveness;
 
   @Column(name = "target_loudness")
-  private double targetLoudenes;
+  private double targetLoudness;
 
   @Column(name = "target_mode")
   private double targetMode;

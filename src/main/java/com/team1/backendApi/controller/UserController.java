@@ -79,7 +79,7 @@ public class UserController {
         );
         playlistMap.put("target_key", playlist.getTargetKey());
         playlistMap.put("target_liveness", playlist.getTargetLiveness());
-        playlistMap.put("target_loudness", playlist.getTargetLoudenes());
+        playlistMap.put("target_loudness", playlist.getTargetLoudness());
         playlistMap.put("target_mode", playlist.getTargetMode());
         playlistMap.put("target_speechiness", playlist.getTargetSpeechiness());
         playlistMap.put("target_tempo", playlist.getTargetTempo());
@@ -128,7 +128,7 @@ public class UserController {
                 playlistData.put("target_instrumentalness", playlist.getTargetInstrumentalness());
                 playlistData.put("target_key", playlist.getTargetKey());
                 playlistData.put("target_liveness", playlist.getTargetLiveness());
-                playlistData.put("target_loudness", playlist.getTargetLoudenes());
+                playlistData.put("target_loudness", playlist.getTargetLoudness());
                 playlistData.put("target_mode", playlist.getTargetMode());
                 playlistData.put("target_speechiness", playlist.getTargetSpeechiness());
                 playlistData.put("target_tempo", playlist.getTargetTempo());

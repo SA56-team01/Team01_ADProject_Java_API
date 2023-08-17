@@ -54,7 +54,7 @@ public class PlaylistController {
           playlist.getTargetInstrumentalness(),
           playlist.getTargetKey(),
           playlist.getTargetLiveness(),
-          playlist.getTargetLoudenes(),
+          playlist.getTargetLoudness(),
           playlist.getTargetMode(),
           playlist.getTargetSpeechiness(),
           playlist.getTargetTempo(),
@@ -100,7 +100,7 @@ public class PlaylistController {
       );
       newPlaylist.setTargetKey(playlist.getTargetKey());
       newPlaylist.setTargetLiveness(playlist.getTargetLiveness());
-      newPlaylist.setTargetLoudenes(playlist.getTargetLoudenes());
+      newPlaylist.setTargetLoudness(playlist.getTargetLoudness());
       newPlaylist.setTargetMode(playlist.getTargetMode());
       newPlaylist.setTargetSpeechiness(playlist.getTargetSpeechiness());
       newPlaylist.setTargetTempo(playlist.getTargetTempo());
