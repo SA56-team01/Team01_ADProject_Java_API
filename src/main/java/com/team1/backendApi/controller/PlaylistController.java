@@ -29,7 +29,7 @@ public class PlaylistController {
   @Autowired
   private UserService userService;
 
-  @GetMapping("/allPlaylists")
+  @GetMapping("/allPlaylists") //React
   public ResponseEntity<List<Playlist>> getAllPlaylists() {
     List<Playlist> playlists = playlistService.getAllPlaylists();
     return ResponseEntity.ok(playlists);

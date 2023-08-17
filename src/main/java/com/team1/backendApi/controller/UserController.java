@@ -11,7 +11,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +24,24 @@ public class UserController {
 
   @Autowired
   UserService userService;
+
+  @PostMapping("/save")
+  public ResponseEntity<String> createUser(
+    @RequestParam("spotify_user_id") String spotifyUserId,
+    @RequestParam("user_email") String userEmail
+  ) {
+    try {
+      User user = userService.getUserBySpotifyUserId(spotifyUserId);
+      if (user == null) {
+        userService.createUser(spotifyUserId, userEmail);
+        return new ResponseEntity<>("User successfully created", HttpStatus.OK);
+      } else {
+        return ResponseEntity.ok("User already exists");
+      }
+    } catch (Exception e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
 
   // @GetMapping("/details")
   // public ResponseEntity<?> getUserData1(@RequestParam("user_id") Long userId) {
@@ -97,58 +117,77 @@ public class UserController {
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
   }
-    @GetMapping("/alldetails")
+
+  @GetMapping("/alldetails")
   public ResponseEntity<?> getAllUsersData() {
     try {
-        List<User> users = userService.getAllUsers(); // Assuming you have a method to retrieve all users
+      List<User> users = userService.getAllUsers(); // Assuming you have a method to retrieve all users
 
-        List<Map<String, Object>> response = new ArrayList<>();
+      List<Map<String, Object>> response = new ArrayList<>();
 
-        for (User user : users) {
-            Map<String, Object> userData = new HashMap<>();
-            userData.put("user_id", user.getUserId());
-            userData.put("spotify_user_id", user.getSpotifyUserId());
-            userData.put("user_market", user.getUserMarket());
-            userData.put("email", user.getUserEmail());
+      for (User user : users) {
+        Map<String, Object> userData = new HashMap<>();
+        userData.put("user_id", user.getUserId());
+        userData.put("spotify_user_id", user.getSpotifyUserId());
+        userData.put("user_market", user.getUserMarket());
+        userData.put("email", user.getUserEmail());
 
-            List<Map<String, Object>> playlistsData = new ArrayList<>();
+        List<Map<String, Object>> playlistsData = new ArrayList<>();
 
-            for (Playlist playlist : user.getPlaylists()) {
-                Map<String, Object> playlistData = new HashMap<>();
-                playlistData.put("playlist_id", playlist.getId());
-                playlistData.put("playlist_name", playlist.getPlaylistName());
-                playlistData.put("spotify_playlist_id", playlist.getSpotifyPlaylistId());
-                playlistData.put("latitude", playlist.getLatitude());
-                playlistData.put("longitude", playlist.getLongitude());
-                playlistData.put("timestamp", playlist.getTimestamp());
-                playlistData.put("seed_tracks", Arrays.asList(playlist.getSeedTracks().split(",")));
-                playlistData.put("target_acousticness", playlist.getTargetAcousticness());
-                playlistData.put("target_danceability", playlist.getTargetDanceability());
-                playlistData.put("target_energy", playlist.getTargetEnergy());
-                playlistData.put("target_instrumentalness", playlist.getTargetInstrumentalness());
-                playlistData.put("target_key", playlist.getTargetKey());
-                playlistData.put("target_liveness", playlist.getTargetLiveness());
-                playlistData.put("target_loudness", playlist.getTargetLoudness());
-                playlistData.put("target_mode", playlist.getTargetMode());
-                playlistData.put("target_speechiness", playlist.getTargetSpeechiness());
-                playlistData.put("target_tempo", playlist.getTargetTempo());
-                playlistData.put("target_time_signature", playlist.getTargetTimeSignature());
-                playlistData.put("target_valence", playlist.getTargetValence());
-                playlistData.put("type", playlist.getType());
+        for (Playlist playlist : user.getPlaylists()) {
+          Map<String, Object> playlistData = new HashMap<>();
+          playlistData.put("playlist_id", playlist.getId());
+          playlistData.put("playlist_name", playlist.getPlaylistName());
+          playlistData.put(
+            "spotify_playlist_id",
+            playlist.getSpotifyPlaylistId()
+          );
+          playlistData.put("latitude", playlist.getLatitude());
+          playlistData.put("longitude", playlist.getLongitude());
+          playlistData.put("timestamp", playlist.getTimestamp());
+          playlistData.put(
+            "seed_tracks",
+            Arrays.asList(playlist.getSeedTracks().split(","))
+          );
+          playlistData.put(
+            "target_acousticness",
+            playlist.getTargetAcousticness()
+          );
+          playlistData.put(
+            "target_danceability",
+            playlist.getTargetDanceability()
+          );
+          playlistData.put("target_energy", playlist.getTargetEnergy());
+          playlistData.put(
+            "target_instrumentalness",
+            playlist.getTargetInstrumentalness()
+          );
+          playlistData.put("target_key", playlist.getTargetKey());
+          playlistData.put("target_liveness", playlist.getTargetLiveness());
+          playlistData.put("target_loudness", playlist.getTargetLoudness());
+          playlistData.put("target_mode", playlist.getTargetMode());
+          playlistData.put(
+            "target_speechiness",
+            playlist.getTargetSpeechiness()
+          );
+          playlistData.put("target_tempo", playlist.getTargetTempo());
+          playlistData.put(
+            "target_time_signature",
+            playlist.getTargetTimeSignature()
+          );
+          playlistData.put("target_valence", playlist.getTargetValence());
+          playlistData.put("type", playlist.getType());
 
-                playlistsData.add(playlistData);
-            }
-
-            userData.put("playlists", playlistsData);
-            response.add(userData);
+          playlistsData.add(playlistData);
         }
 
-        return ResponseEntity.ok(response);
+        userData.put("playlists", playlistsData);
+        response.add(userData);
+      }
+
+      return ResponseEntity.ok(response);
     } catch (Exception e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
-}
-
-
-  
+  }
 }

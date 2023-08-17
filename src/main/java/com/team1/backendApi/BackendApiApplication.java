@@ -55,28 +55,20 @@ public class BackendApiApplication {
       // Save the admin with hashed password
       adminRepository.save(admin);
 
-      //   Admin admin1 = new Admin("admin1", "password1", adminRole);
-      //   Admin admin2 = new Admin("admin2", "password2", adminRole);
-
-      //   adminRepository.save(admin1);
-      //   adminRepository.save(admin2);
-
-      User user1 = new User("_feroz_", "SG", "user1@example.com");
-
-      User user2 = new User(
+      User user1 = new User(
         "31yi3mwekgnigzuk5ynbzwrhwm34",
         "SG",
         "user2@example.com"
       );
-
+      User user2 = new User("user2", "SG", "user2@example.com");
       User user3 = new User("user3", "SG", "user3@example.com");
       User user4 = new User("user4", "SG", "user4@example.com");
-      User user5 = new User("user5", "UK", "user5@example.com");
-      User user6 = new User("user6", "UK", "user6@example.com");
-      User user7 = new User("user7", "UK", "user7@example.com");
+      User user5 = new User("user5", "SG", "user5@example.com");
+      User user6 = new User("user6", "SG", "user6@example.com");
+      User user7 = new User("user7", "SG", "user7@example.com");
       User user8 = new User("user8", "SG", "user8@example.com");
-      User user9 = new User("user9", "US", "user9@example.com");
-      User user10 = new User("user10", "US", "user10@example.com");
+      User user9 = new User("user9", "SG", "user9@example.com");
+      User user10 = new User("user10", "SG", "user10@example.com");
 
       userRepository.saveAndFlush(user1);
       userRepository.saveAndFlush(user2);

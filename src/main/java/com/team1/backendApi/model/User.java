@@ -60,4 +60,10 @@ public class User {
     this.userHistories = new ArrayList<UserHistory>();
     this.feedback = new ArrayList<Feedback>();
   }
+
+  public User(String spotifyUserId, String userEmail) {
+    this.spotifyUserId = spotifyUserId;
+    this.userMarket = "SG";
+    this.userEmail = userEmail;
+  }
 }
