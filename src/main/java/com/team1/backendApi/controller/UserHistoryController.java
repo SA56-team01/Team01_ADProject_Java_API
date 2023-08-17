@@ -30,12 +30,6 @@ public class UserHistoryController {
     @Autowired
     private UserService userService;
 
-    // @GetMapping("/user/history") //ML
-    // public ResponseEntity<List<UserHistory>> getUserHistory() {
-    //     List<UserHistory> historyEntries = userHistoryService.getUserHistory();
-    //     return ResponseEntity.ok(historyEntries);
-    // }
-
     @GetMapping("/user/history/{spotifyUserId}") //ML
     public ResponseEntity<List<UserHistory>> getUserHistory(@PathVariable String spotifyUserId) {
         List<UserHistory> historyEntries = new ArrayList<UserHistory>();
@@ -43,32 +37,22 @@ public class UserHistoryController {
         return ResponseEntity.ok(historyEntries);
     }
 
-    // @PostMapping("/user-history") //android
-    // public ResponseEntity<String> addUserHistory(@RequestBody UserHistoryDto userHistoryDto) {
-    //     try {
-    //         userHistoryService.addUserHistory(userHistoryDto);
-    //         return ResponseEntity.ok("User history added successfully");
-    //     } catch (Exception e) {
-    //         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error adding user history");
-    //     }
-    // }
-
     @PostMapping("/userHistory") //android
     public ResponseEntity<String> addUserHistory(@RequestParam("spotify_userId") String spotifyUserId, @RequestBody UserHistory userHistory) {
         try {
             User user = userService.getUserBySpotifyUserId(spotifyUserId);
 
             if(user == null){
-                return new ResponseEntity<String>("no user found for user id"+ spotifyUserId , HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<String>("No user found for Spotify User Id: "+ spotifyUserId , HttpStatus.INTERNAL_SERVER_ERROR);
             }
             
             UserHistory newUserHistory = new UserHistory();
-            newUserHistory.setUser(userService.getUserBySpotifyUserId(spotifyUserId));
-            newUserHistory.setSpotifyTrackId(spotifyUserId);
+            newUserHistory.setUser(user);
+            newUserHistory.setSpotifyTrackId(userHistory.getSpotifyTrackId());
             newUserHistory.setLatitude(userHistory.getLatitude());
             newUserHistory.setLongitude(userHistory.getLongitude());
             newUserHistory.setTimestamp(userHistory.getTimestamp());
-
+            
             userHistoryService.addUserHistory(newUserHistory);
 
             return ResponseEntity.ok("User history added successfully.");

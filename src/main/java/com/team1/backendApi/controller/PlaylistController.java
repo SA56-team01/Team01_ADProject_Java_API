@@ -64,7 +64,7 @@ public class PlaylistController {
             }
             
             Playlist newPlaylist = new Playlist();
-            newPlaylist.setUser(userService.getUserBySpotifyUserId(spotifyUserId));
+            newPlaylist.setUser(user);
             newPlaylist.setPlaylistName(playlist.getPlaylistName());
             newPlaylist.setTimestamp(playlist.getTimestamp());
             newPlaylist.setLongitude(playlist.getLongitude());

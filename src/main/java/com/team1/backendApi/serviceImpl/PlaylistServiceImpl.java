@@ -9,6 +9,8 @@ import com.team1.backendApi.model.Playlist;
 import com.team1.backendApi.repository.PlaylistRepository;
 import com.team1.backendApi.service.PlaylistService;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class PlaylistServiceImpl implements PlaylistService {
 
@@ -21,6 +23,7 @@ public class PlaylistServiceImpl implements PlaylistService {
     }
 
     @Override
+    @Transactional
     public Playlist savePlaylist(Playlist playlist) {
         return playlistRepository.save(playlist);
     }

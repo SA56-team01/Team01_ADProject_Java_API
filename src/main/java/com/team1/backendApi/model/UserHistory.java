@@ -26,11 +26,18 @@ public class UserHistory {
     private String spotifyTrackId;
 
     @Column(name = "timestamp")
-    //@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private String timestamp;
     
     @ManyToOne
     @JoinColumn(name = "spotify_user_id")
     private User user;
+
+    public UserHistory(User user, double latitude, double longitude, String spotifyTrackId, String timestamp){
+        this.user = user;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.spotifyTrackId = spotifyTrackId;
+        this.timestamp = timestamp;
+    }
     
 }

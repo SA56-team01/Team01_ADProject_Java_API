@@ -33,15 +33,15 @@ public class User {
     @Column(name = "user_email")
     private String userEmail;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "role_id")
-    private Role role;
+    // @OneToOne(cascade = CascadeType.ALL)
+    // @JoinColumn(name = "role_id")
+    // private Role role;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "user")
     @JsonIgnore
     private List<Playlist> playlists;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "user")
     @JsonIgnore
     private List<UserHistory> userHistories;
 
@@ -49,11 +49,10 @@ public class User {
     @JsonIgnore
     private List<Feedback> feedback;
 
-    public User(String spotifyUserId, String userMarket, String userEmail, Role role) {
+    public User(String spotifyUserId, String userMarket, String userEmail) {
         this.spotifyUserId = spotifyUserId;
         this.userMarket = userMarket;
         this.userEmail = userEmail;
-        this.role = role;
         this.playlists = new ArrayList<Playlist>();
         this.userHistories = new ArrayList<UserHistory>();
         this.feedback = new ArrayList<Feedback>();
