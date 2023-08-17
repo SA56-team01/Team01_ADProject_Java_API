@@ -97,4 +97,58 @@ public class UserController {
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
   }
+    @GetMapping("/alldetails")
+  public ResponseEntity<?> getAllUsersData() {
+    try {
+        List<User> users = userService.getAllUsers(); // Assuming you have a method to retrieve all users
+
+        List<Map<String, Object>> response = new ArrayList<>();
+
+        for (User user : users) {
+            Map<String, Object> userData = new HashMap<>();
+            userData.put("user_id", user.getUserId());
+            userData.put("spotify_user_id", user.getSpotifyUserId());
+            userData.put("country", user.getUserMarket());
+            userData.put("email", user.getUserEmail());
+
+            List<Map<String, Object>> playlistsData = new ArrayList<>();
+
+            for (Playlist playlist : user.getPlaylists()) {
+                Map<String, Object> playlistData = new HashMap<>();
+                playlistData.put("playlist_id", playlist.getId());
+                playlistData.put("playlist_name", playlist.getPlaylistName());
+                playlistData.put("spotify_playlist_id", playlist.getSpotifyPlaylistId());
+                playlistData.put("latitude", playlist.getLatitude());
+                playlistData.put("longitude", playlist.getLongitude());
+                playlistData.put("timestamp", playlist.getTimestamp());
+                playlistData.put("seed_tracks", Arrays.asList(playlist.getSeedTracks().split(",")));
+                playlistData.put("target_acousticness", playlist.getTargetAcousticness());
+                playlistData.put("target_danceability", playlist.getTargetDanceability());
+                playlistData.put("target_energy", playlist.getTargetEnergy());
+                playlistData.put("target_instrumentalness", playlist.getTargetInstrumentalness());
+                playlistData.put("target_key", playlist.getTargetKey());
+                playlistData.put("target_liveness", playlist.getTargetLiveness());
+                playlistData.put("target_loudness", playlist.getTargetLoudenes());
+                playlistData.put("target_mode", playlist.getTargetMode());
+                playlistData.put("target_speechiness", playlist.getTargetSpeechiness());
+                playlistData.put("target_tempo", playlist.getTargetTempo());
+                playlistData.put("target_time_signature", playlist.getTargetTimeSignature());
+                playlistData.put("target_valence", playlist.getTargetValence());
+                playlistData.put("type", playlist.getType());
+
+                playlistsData.add(playlistData);
+            }
+
+            userData.put("playlists", playlistsData);
+            response.add(userData);
+        }
+
+        return ResponseEntity.ok(response);
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+}
+
+
+  
 }

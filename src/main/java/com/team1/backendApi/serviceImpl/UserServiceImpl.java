@@ -1,5 +1,7 @@
 package com.team1.backendApi.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
@@ -30,6 +32,11 @@ public class UserServiceImpl implements UserService {
         User newUser = new User();
         newUser.setSpotifyUserId(spotifyUserId);
         userRepo.save(newUser);
+    }
+
+    @Override
+    public List<User> getAllUsers(){
+        return userRepo.findAll();
     }
 
 }
