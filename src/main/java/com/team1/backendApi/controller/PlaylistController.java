@@ -29,6 +29,12 @@ public class PlaylistController {
   @Autowired
   private UserService userService;
 
+  @GetMapping("/allPlaylists")
+  public ResponseEntity<List<Playlist>> getAllPlaylists() {
+    List<Playlist> playlists = playlistService.getAllPlaylists();
+    return ResponseEntity.ok(playlists);
+  }
+
   @GetMapping("/user/{spotifyUserId}")
   public ResponseEntity<List<PlaylistDto>> getPlaylistsBySpotifyUserId(
     @PathVariable String spotifyUserId

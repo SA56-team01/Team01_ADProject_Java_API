@@ -94,4 +94,50 @@ public class Playlist {
   )
   @JsonManagedReference
   private List<PlaylistSong> playlistSongs;
+
+  public Playlist(
+    String playlistName,
+    String spotifyPlaylistId,
+    String timestamp,
+    Double longitude,
+    Double latitude,
+    String seedTracks,
+    double targetAcousticness,
+    double targetDanceability,
+    double targetEnergy,
+    double targetInstrumentalness,
+    double targetKey,
+    double targetLiveness,
+    double targetLoudness,
+    double targetMode,
+    double targetSpeechiness,
+    double targetTempo,
+    double targetTimeSignature,
+    double targetValence,
+    String type,
+    User user,
+    List<PlaylistSong> playlistSongs
+  ) {
+    this.playlistName = playlistName;
+    this.spotifyPlaylistId = spotifyPlaylistId;
+    this.timestamp = timestamp;
+    this.longitude = longitude;
+    this.latitude = latitude;
+    this.seedTracks = seedTracks;
+    this.targetAcousticness = targetAcousticness;
+    this.targetDanceability = targetDanceability;
+    this.targetEnergy = targetEnergy;
+    this.targetInstrumentalness = targetInstrumentalness;
+    this.targetKey = targetKey;
+    this.targetLiveness = targetLiveness;
+    this.targetLoudness = targetLoudness;
+    this.targetMode = targetMode;
+    this.targetSpeechiness = targetSpeechiness;
+    this.targetTempo = targetTempo;
+    this.targetTimeSignature = targetTimeSignature;
+    this.targetValence = targetValence;
+    this.type = type;
+    this.user = user;
+    this.playlistSongs = playlistSongs;
+  }
 }
