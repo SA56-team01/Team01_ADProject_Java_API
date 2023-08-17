@@ -108,7 +108,7 @@ public class UserController {
             Map<String, Object> userData = new HashMap<>();
             userData.put("user_id", user.getUserId());
             userData.put("spotify_user_id", user.getSpotifyUserId());
-            userData.put("country", user.getUserMarket());
+            userData.put("user_market", user.getUserMarket());
             userData.put("email", user.getUserEmail());
 
             List<Map<String, Object>> playlistsData = new ArrayList<>();
