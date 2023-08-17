@@ -9,7 +9,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.team1.backendApi.config.CorsConfig;
 import com.team1.backendApi.model.Admin;
-import com.team1.backendApi.model.Role;
 
 import com.team1.backendApi.repository.AdminRepository;
 
@@ -19,10 +18,10 @@ import org.springframework.context.annotation.Import;
 @SpringBootApplication
 public class BackendApiApplication {
     
-    @Autowired
-    AdminRepository adminRepo;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+  @Autowired
+  AdminRepository adminRepo;
+  @Autowired
+  private PasswordEncoder passwordEncoder;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackendApiApplication.class, args);
@@ -36,7 +35,6 @@ public class BackendApiApplication {
     // playlistRepository.saveAll(Arrays.asList(playlist1, playlist2));
     // playlistSongRepository.saveAll(Arrays.asList(song1, song2, song3, song4));
      // Create a new admin
-        Role adminRole = new Role("ROLE_ADMIN");
         Admin admin = new Admin();
         admin.setUsername("admin2");
         admin.setPassword(passwordEncoder.encode("secretpassword"));

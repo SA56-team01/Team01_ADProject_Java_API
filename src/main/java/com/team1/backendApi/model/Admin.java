@@ -23,13 +23,8 @@ public class Admin {
 
   private String password;
 
-  @OneToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "role_id")
-  private Role role;
-
-  public Admin(String username, String password, Role role) {
+  public Admin(String username, String password) {
     this.username = username;
     this.password = password;
-    this.role = role;
   }
 }
