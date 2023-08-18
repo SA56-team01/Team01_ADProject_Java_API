@@ -9,6 +9,9 @@ import com.team1.backendApi.repository.AdminRepository;
 import com.team1.backendApi.repository.PlaylistRepository;
 import com.team1.backendApi.repository.PlaylistSongRepository;
 import com.team1.backendApi.repository.UserRepository;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -88,6 +91,7 @@ public class BackendApiApplication {
       //     "electronic",
       //     "indie"
       //   );
+
       Random random = new Random();
 
       List<User> users = userRepository.findAll().subList(0, 10);
@@ -95,7 +99,25 @@ public class BackendApiApplication {
       for (int i = 1; i <= 100; i++) {
         String playlistName = "Playlist " + i;
         String spotifyPlaylistId = "spotifyPlaylistId" + i;
-        String timestamp = "2023-08-" + (14 + i % 7); // Generating a random date between 2023-08-14 and 2023-08-20
+        //String timestamp = "2023-08-" + (14 + i % 7); // Generating a random date between 2022-08-14 and 2023-08-20
+
+        // Generating a random date between 2022-08-14 and 2023-08-20
+        LocalDate startDate = LocalDate.of(2022, 8, 14);
+        LocalDate endDate = LocalDate.of(2023, 8, 20);
+        long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
+        LocalDate randomDate = startDate.plusDays(
+          random.nextInt((int) daysBetween + 1)
+        );
+
+        // Generating a random time (hh:mm:ss)
+        LocalTime randomTime = LocalTime.of(
+          random.nextInt(24),
+          random.nextInt(60),
+          random.nextInt(60)
+        );
+
+        String timestamp = randomDate.toString() + " " + randomTime.toString();
+
         double longitude = 101.333 + (104.412 - 101.333) * random.nextDouble();
         double latitude = 1.083 + (4.0 - 1.083) * random.nextDouble();
         String seedTracks = "t" + i;
