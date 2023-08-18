@@ -3,6 +3,7 @@ package com.team1.backendApi.controller;
 import com.team1.backendApi.model.Playlist;
 import com.team1.backendApi.model.PlaylistDto;
 import com.team1.backendApi.model.PlaylistSong;
+import com.team1.backendApi.model.PlaylistWithUserDto;
 import com.team1.backendApi.model.User;
 import com.team1.backendApi.service.PlaylistService;
 import com.team1.backendApi.service.UserService;
@@ -30,12 +31,49 @@ public class PlaylistController {
   private UserService userService;
 
   @GetMapping("/allPlaylists") //React
-  public ResponseEntity<List<Playlist>> getAllPlaylists() {
+  public ResponseEntity<List<PlaylistWithUserDto>> getAllPlaylists() {
     List<Playlist> playlists = playlistService.getAllPlaylists();
-    return ResponseEntity.ok(playlists);
+
+    List<PlaylistWithUserDto> playlistDTOs = new ArrayList<>();
+    for (Playlist playlist : playlists) {
+      PlaylistWithUserDto playlistDTO = new PlaylistWithUserDto();
+
+      playlistDTO.setId(playlist.getId());
+      playlistDTO.setPlaylistName(playlist.getPlaylistName());
+      playlistDTO.setSpotifyPlaylistId(playlist.getSpotifyPlaylistId());
+      playlistDTO.setTimestamp(playlist.getTimestamp());
+      playlistDTO.setLongitude(playlist.getLongitude());
+      playlistDTO.setLatitude(playlist.getLatitude());
+      playlistDTO.setSeedTracks(playlist.getSeedTracks());
+      playlistDTO.setTargetAcousticness(playlist.getTargetAcousticness());
+      playlistDTO.setTargetDanceability(playlist.getTargetDanceability());
+      playlistDTO.setTargetEnergy(playlist.getTargetEnergy());
+      playlistDTO.setTargetInstrumentalness(
+        playlist.getTargetInstrumentalness()
+      );
+      playlistDTO.setTargetKey(playlist.getTargetKey());
+      playlistDTO.setTargetLiveness(playlist.getTargetLiveness());
+      playlistDTO.setTargetLoudness(playlist.getTargetLoudness());
+      playlistDTO.setTargetMode(playlist.getTargetMode());
+      playlistDTO.setTargetSpeechiness(playlist.getTargetSpeechiness());
+      playlistDTO.setTargetTempo(playlist.getTargetTempo());
+      playlistDTO.setTargetTimeSignature(playlist.getTargetTimeSignature());
+      playlistDTO.setTargetValence(playlist.getTargetValence());
+      playlistDTO.setType(playlist.getType());
+
+      // Set userId in DTO
+      User user = playlist.getUser();
+      playlistDTO.setUserId(user.getUserId());
+
+      playlistDTO.setPlaylistSongs(playlist.getPlaylistSongs());
+
+      playlistDTOs.add(playlistDTO);
+    }
+
+    return ResponseEntity.ok(playlistDTOs);
   }
 
-  @GetMapping("/user/{spotifyUserId}")
+  @GetMapping("/user/{spotifyUserId}") //Android
   public ResponseEntity<List<PlaylistDto>> getPlaylistsBySpotifyUserId(
     @PathVariable String spotifyUserId
   ) {
