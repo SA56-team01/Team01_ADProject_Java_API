@@ -1,5 +1,6 @@
 package com.team1.backendApi;
 
+import com.team1.backendApi.config.CoordinateGenerator;
 import com.team1.backendApi.config.CorsConfig;
 import com.team1.backendApi.model.Admin;
 import com.team1.backendApi.model.Feedback;
@@ -52,16 +53,16 @@ public class BackendApiApplication {
   }
 
   private String[] feedbackTexts = {
-    "The playlist suggestions are amazing!",
-    "This app has made discovering music so much fun.",
-    "I love the variety of songs in the playlists.",
-    "The generated playlists match my taste perfectly.",
-    "Great job on creating unique playlists.",
-    "I can't stop listening to the playlists from this app.",
-    "The app's recommendations are on point.",
-    "My friends are jealous of my awesome playlists.",
-    "This is the best music app I've ever used.",
-    "The playlist for my workout session was fire!",
+      "The playlist suggestions are amazing!",
+      "This app has made discovering music so much fun.",
+      "I love the variety of songs in the playlists.",
+      "The generated playlists match my taste perfectly.",
+      "Great job on creating unique playlists.",
+      "I can't stop listening to the playlists from this app.",
+      "The app's recommendations are on point.",
+      "My friends are jealous of my awesome playlists.",
+      "This is the best music app I've ever used.",
+      "The playlist for my workout session was fire!",
   };
 
   @Bean
@@ -71,15 +72,15 @@ public class BackendApiApplication {
       Admin admin = new Admin();
       admin.setUsername("admin2");
       admin.setPassword(passwordEncoder.encode("secretpassword"));
+      CoordinateGenerator coordinateGenerator = new CoordinateGenerator();
 
       // Save the admin with hashed password
       adminRepository.save(admin);
 
       User user1 = new User(
-        "31yi3mwekgnigzuk5ynbzwrhwm34",
-        "SG",
-        "user1@example.com"
-      );
+          "31yi3mwekgnigzuk5ynbzwrhwm34",
+          "SG",
+          "user1@example.com");
 
       userRepository.saveAndFlush(user1);
 
@@ -97,27 +98,27 @@ public class BackendApiApplication {
       for (int i = 1; i <= 100; i++) {
         String playlistName = "Playlist " + i;
         String spotifyPlaylistId = "spotifyPlaylistId" + i;
-        //String timestamp = "2023-08-" + (14 + i % 7); // Generating a random date between 2022-08-14 and 2023-08-20
+        // String timestamp = "2023-08-" + (14 + i % 7); // Generating a random date
+        // between 2022-08-14 and 2023-08-20
 
         // Generating a random date between 2022-08-14 and 2023-08-20
         LocalDate startDate = LocalDate.of(2022, 8, 14);
         LocalDate endDate = LocalDate.of(2023, 8, 20);
         long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
         LocalDate randomDate = startDate.plusDays(
-          random.nextInt((int) daysBetween + 1)
-        );
+            random.nextInt((int) daysBetween + 1));
 
         // Generating a random time (hh:mm:ss)
         LocalTime randomTime = LocalTime.of(
-          random.nextInt(24),
-          random.nextInt(60),
-          random.nextInt(60)
-        );
+            random.nextInt(24),
+            random.nextInt(60),
+            random.nextInt(60));
 
         String timestamp = randomDate.toString() + " " + randomTime.toString();
 
-        double longitude = 101.333 + (104.412 - 101.333) * random.nextDouble();
-        double latitude = 1.083 + (4.0 - 1.083) * random.nextDouble();
+        // Generate random latitude and longitude points
+        double longitude = coordinateGenerator.generateRandomLongitude();
+        double latitude = coordinateGenerator.generateRandomLatitude();
         String seedTracks = "t" + i;
         double targetAcousticness = random.nextDouble();
         double targetDanceability = random.nextDouble();
@@ -135,28 +136,27 @@ public class BackendApiApplication {
         User user = users.get(i % 10);
 
         Playlist playlist = new Playlist(
-          playlistName,
-          spotifyPlaylistId,
-          timestamp,
-          longitude,
-          latitude,
-          seedTracks,
-          targetAcousticness,
-          targetDanceability,
-          targetEnergy,
-          targetInstrumentalness,
-          targetKey,
-          targetLiveness,
-          targetLoudness,
-          targetMode,
-          targetSpeechiness,
-          targetTempo,
-          targetTimeSignature,
-          targetValence,
-          type,
-          user,
-          new ArrayList<>()
-        );
+            playlistName,
+            spotifyPlaylistId,
+            timestamp,
+            longitude,
+            latitude,
+            seedTracks,
+            targetAcousticness,
+            targetDanceability,
+            targetEnergy,
+            targetInstrumentalness,
+            targetKey,
+            targetLiveness,
+            targetLoudness,
+            targetMode,
+            targetSpeechiness,
+            targetTempo,
+            targetTimeSignature,
+            targetValence,
+            type,
+            user,
+            new ArrayList<>());
 
         playlistRepository.save(playlist);
 
@@ -172,26 +172,22 @@ public class BackendApiApplication {
       for (int i = 1; i <= 30; i++) {
         Feedback feedback = new Feedback();
         feedback.setFeedbackText(
-          feedbackTexts[random.nextInt(feedbackTexts.length)]
-        );
+            feedbackTexts[random.nextInt(feedbackTexts.length)]);
 
         // Generating a random date between 2022-08-14 and 2023-08-20
         LocalDate startDate = LocalDate.of(2022, 8, 14);
         LocalDate endDate = LocalDate.of(2023, 8, 20);
         long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
         LocalDate randomDate = startDate.plusDays(
-          random.nextInt((int) daysBetween + 1)
-        );
+            random.nextInt((int) daysBetween + 1));
 
         // Generating a random time (hh:mm:ss)
         LocalTime randomTime = LocalTime.of(
-          random.nextInt(24),
-          random.nextInt(60),
-          random.nextInt(60)
-        );
+            random.nextInt(24),
+            random.nextInt(60),
+            random.nextInt(60));
 
-        String fbTimestamp =
-          randomDate.toString() + " " + randomTime.toString();
+        String fbTimestamp = randomDate.toString() + " " + randomTime.toString();
         feedback.setFbTimestamp(fbTimestamp);
 
         // Associate the feedback with a random user
