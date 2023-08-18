@@ -3,60 +3,61 @@ package com.team1.backendApi.config;
 import java.util.Random;
 
 public class CoordinateGenerator {
-    private static final double CENTER_LATITUDE = 1.3521; // Center latitude of Singapore
-    private static final double CENTER_LONGITUDE = 103.8198; // Center longitude of Singapore
 
-    private Random random;
+  private static final double CENTER_LATITUDE = 1.3521; // Center latitude of Singapore
+  private static final double CENTER_LONGITUDE = 103.8198; // Center longitude of Singapore
 
-    public CoordinateGenerator() {
-        random = new Random();
-    }
+  private Random random;
 
-    public double generateRandomLongitude() {
-        double radius = getRandomRadius(); // Generate random radius within 5km
+  public CoordinateGenerator() {
+    random = new Random();
+  }
 
-        double rd = radius / 111300; // Convert radius from meters to degrees
+  public double generateRandomLongitude() {
+    double radius = getRandomRadius(); // Generate random radius within 5km
 
-        // Random angle
-        double u = random.nextDouble();
-        double v = random.nextDouble();
-        double w = rd * Math.sqrt(u);
-        double t = 2 * Math.PI * v;
-        double x = w * Math.cos(t);
-        double y = w * Math.sin(t);
+    double rd = radius / 111300; // Convert radius from meters to degrees
 
-        // Adjust the x-coordinate for the shrinking of the east-west distances
-        double xp = x / Math.cos(Math.toRadians(CENTER_LATITUDE));
+    // Random angle
+    double u = random.nextDouble();
+    double v = random.nextDouble();
+    double w = rd * Math.sqrt(u);
+    double t = 2 * Math.PI * v;
+    double x = w * Math.cos(t);
+    double y = w * Math.sin(t);
 
-        // Calculate longitude
-        double longitude = xp + CENTER_LONGITUDE;
+    // Adjust the x-coordinate for the shrinking of the east-west distances
+    double xp = x / Math.cos(Math.toRadians(CENTER_LATITUDE));
 
-        return longitude;
-    }
+    // Calculate longitude
+    double longitude = xp + CENTER_LONGITUDE;
 
-    public double generateRandomLatitude() {
-        double radius = getRandomRadius(); // Generate random radius within 5km
+    return longitude;
+  }
 
-        double rd = radius / 111300; // Convert radius from meters to degrees
+  public double generateRandomLatitude() {
+    double radius = getRandomRadius(); // Generate random radius within 5km
 
-        // Random angle
-        double u = random.nextDouble();
-        double v = random.nextDouble();
-        double w = rd * Math.sqrt(u);
-        double t = 2 * Math.PI * v;
-        double x = w * Math.cos(t);
-        double y = w * Math.sin(t);
+    double rd = radius / 111300; // Convert radius from meters to degrees
 
-        // Calculate latitude
-        double latitude = y + CENTER_LATITUDE;
+    // Random angle
+    double u = random.nextDouble();
+    double v = random.nextDouble();
+    double w = rd * Math.sqrt(u);
+    double t = 2 * Math.PI * v;
+    double x = w * Math.cos(t);
+    double y = w * Math.sin(t);
 
-        return latitude;
-    }
+    // Calculate latitude
+    double latitude = y + CENTER_LATITUDE;
 
-    private double getRandomRadius() {
-        // Generate random radius within 5km (5000 meters)
-        double radius = random.nextDouble() * 5000;
+    return latitude;
+  }
 
-        return radius;
-    }
+  private double getRandomRadius() {
+    // Generate random radius within 12km (12000 meters)
+    double radius = random.nextDouble() * 12000;
+
+    return radius;
+  }
 }
