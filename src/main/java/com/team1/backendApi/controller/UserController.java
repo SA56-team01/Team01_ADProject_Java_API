@@ -25,7 +25,7 @@ public class UserController {
   @Autowired
   UserService userService;
 
-  @PostMapping("/save")
+  @PostMapping("/save") //Android
   public ResponseEntity<String> createUser(
     @RequestParam("spotify_user_id") String spotifyUserId,
     @RequestParam("user_email") String userEmail
@@ -55,6 +55,12 @@ public class UserController {
 
   //     return ResponseEntity.ok(user);
   // }
+
+  @GetMapping("/allUsers") //React
+  public ResponseEntity<List<User>> getAllUsers() {
+    List<User> allUsers = userService.getAllUsers();
+    return ResponseEntity.ok(allUsers);
+  }
 
   @GetMapping("/detail")
   public ResponseEntity<?> getUserData(@RequestParam("user_id") Long userId) {

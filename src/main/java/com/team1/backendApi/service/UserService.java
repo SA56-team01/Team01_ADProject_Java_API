@@ -8,6 +8,7 @@ public interface UserService {
 
   User getUserById(Long userId);
   void createNewUser(String spotifyUserId);
+
   List<User> getAllUsers();
 
   User createUser(String spotifyUserId, String userEmail);
